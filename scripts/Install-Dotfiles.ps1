@@ -1,5 +1,5 @@
-$MyName = 'Victor Frye'
-$MyEmail = 'victorfrye@outlook.com'
+$MyName = 'Michael Parrett'
+$MyEmail = 'michael.parrett@kingdominternaldev.onmicrosoft.com'
 
 $DevDriveLetter = $null
 $RepoRoot = $null
@@ -24,7 +24,7 @@ function Format-DevDrive() {
 
     $Volumes = Get-Volume
 
-    $DevDrive = $Volumes | Where-Object { $_.FileSystemLabel -eq 'DEVDRIVE' } | Select-Object -First 1
+    $DevDrive = $Volumes | Where-Object { $_.FileSystemLabel -eq 'DEVDEV' } | Select-Object -First 1
 
     if ($DevDrive) {
         $global:DevDriveLetter = $DevDrive.DriveLetter
@@ -43,7 +43,7 @@ function Format-DevDrive() {
 function Get-Repository() {
     Write-Host 'Cloning dotfiles repository...'
 
-    $global:RepoRoot = "$($global:DevDriveLetter):\Source\Repos\VictorFrye\Dotfiles"
+    $global:RepoRoot = "$($global:DevDriveLetter):\Source\Repos\Michael.hbb\Dotfiles"
 
     if (Test-Path -Path $global:RepoRoot) {
         Write-Host "Dotfiles repository already exists at $global:RepoRoot. Fetching latest instead."
@@ -55,7 +55,7 @@ function Get-Repository() {
         return
     }
 
-    git clone https://github.com/victorfrye/dotfiles $global:RepoRoot
+    git clone https://github.com/KingdomInternal-dev-mipa/dotfiles $global:RepoRoot
     Push-Location $global:RepoRoot
 
     Write-Host "Done. Dotfiles repository has been cloned to $global:RepoRoot."
@@ -117,7 +117,7 @@ function Set-EnvironmentVariables() {
     [System.Environment]::SetEnvironmentVariable('DEVDRIVE', "$($global:DevDriveLetter):", 'Machine')
 
     [System.Environment]::SetEnvironmentVariable('REPOS_ROOT', "$($global:DevDriveLetter):\Source\Repos", 'Machine')
-    [System.Environment]::SetEnvironmentVariable('REPOS_VF', "$($global:DevDriveLetter):\Source\Repos\VictorFrye", 'Machine')
+    [System.Environment]::SetEnvironmentVariable('REPOS_MP', "$($global:DevDriveLetter):\Source\Repos\Michael.hbb", 'Machine')
 
     [System.Environment]::SetEnvironmentVariable('PACKAGES_ROOT', "$($global:DevDriveLetter):\Packages", 'Machine')
     [System.Environment]::SetEnvironmentVariable('NPM_CONFIG_CACHE', "$($global:DevDriveLetter):\Packages\.npm", 'Machine')
